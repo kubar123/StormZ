@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        
+        //ButterKnife.setDebug(true);
         String apiKey="5de75ea6e418ac21f9804619e044e268";
         double latitude=37.8267;
         double longitude=-122.423;
@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 								@Override
 								public void run() {
 									mTemperatureLabel.setText("19");
-									updateDisplay();
+									//updateDisplay();
 								}
 							});
 						}else{
