@@ -10,24 +10,33 @@ public class MainActivity$$ViewBinder<T extends com.lansoftprogramming.stormz.Ma
     View view;
     view = finder.findRequiredView(source, 2131230724, "field 'mIconImageView'");
     target.mIconImageView = finder.castView(view, 2131230724, "field 'mIconImageView'");
-    view = finder.findRequiredView(source, 2131230728, "field 'mPercipLabel'");
-    target.mPercipLabel = finder.castView(view, 2131230728, "field 'mPercipLabel'");
-    view = finder.findRequiredView(source, 2131230730, "field 'mSummaryLabel'");
-    target.mSummaryLabel = finder.castView(view, 2131230730, "field 'mSummaryLabel'");
-    view = finder.findRequiredView(source, 2131230726, "field 'mHumidityLabel'");
-    target.mHumidityLabel = finder.castView(view, 2131230726, "field 'mHumidityLabel'");
-    view = finder.findRequiredView(source, 2131230722, "field 'mTimeLabel'");
-    target.mTimeLabel = finder.castView(view, 2131230722, "field 'mTimeLabel'");
+    view = finder.findRequiredView(source, 2131230732, "field 'mProgressBar1'");
+    target.mProgressBar1 = finder.castView(view, 2131230732, "field 'mProgressBar1'");
+    view = finder.findRequiredView(source, 2131230723, "field 'mLocationLabel'");
+    target.mLocationLabel = finder.castView(view, 2131230723, "field 'mLocationLabel'");
+    view = finder.findRequiredView(source, 2131230730, "field 'mSummaryValue'");
+    target.mSummaryValue = finder.castView(view, 2131230730, "field 'mSummaryValue'");
+    view = finder.findRequiredView(source, 2131230727, "field 'mHumidityValue'");
+    target.mHumidityValue = finder.castView(view, 2131230727, "field 'mHumidityValue'");
+    view = finder.findRequiredView(source, 2131230729, "field 'mPercipValue'");
+    target.mPercipValue = finder.castView(view, 2131230729, "field 'mPercipValue'");
     view = finder.findRequiredView(source, 2131230720, "field 'mTemperatureLabel'");
     target.mTemperatureLabel = finder.castView(view, 2131230720, "field 'mTemperatureLabel'");
+    view = finder.findRequiredView(source, 2131230722, "field 'mTimeLabel'");
+    target.mTimeLabel = finder.castView(view, 2131230722, "field 'mTimeLabel'");
+    view = finder.findRequiredView(source, 2131230731, "field 'mRefreshImageView'");
+    target.mRefreshImageView = finder.castView(view, 2131230731, "field 'mRefreshImageView'");
   }
 
   @Override public void unbind(T target) {
     target.mIconImageView = null;
-    target.mPercipLabel = null;
-    target.mSummaryLabel = null;
-    target.mHumidityLabel = null;
-    target.mTimeLabel = null;
+    target.mProgressBar1 = null;
+    target.mLocationLabel = null;
+    target.mSummaryValue = null;
+    target.mHumidityValue = null;
+    target.mPercipValue = null;
     target.mTemperatureLabel = null;
+    target.mTimeLabel = null;
+    target.mRefreshImageView = null;
   }
 }

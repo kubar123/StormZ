@@ -3,7 +3,13 @@ package com.lansoftprogramming.stormz;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
+
+import android.location.Geocoder;
+
+
 
 public class CurrentWeather{
 	private String mIcon;
@@ -13,6 +19,14 @@ public class CurrentWeather{
 	private double mPrecipChance;
 	private String mSummary;
 	private String mTimeZone;
+	private String mLocation;
+	
+	public String getLocation(){
+		return mLocation;
+	}
+	public void setLocation(String loc){
+		this.mLocation=loc;
+	}
 	public String getIcon() {
 		return mIcon;
 	}
@@ -71,8 +85,8 @@ public class CurrentWeather{
 	public void setTime(long time) {
 		mTime = time;
 	}
-	public double getTemperature() {
-		return mTemperature;
+	public int getTemperature() {
+		return (int) Math.round(mTemperature);
 	}
 	public void setTemperature(double temperature) {
 		mTemperature = temperature;
@@ -83,8 +97,8 @@ public class CurrentWeather{
 	public void setHumidity(double humidity) {
 		mHumidity = humidity;
 	}
-	public double getPrecipChance() {
-		return mPrecipChance;
+	public int getPrecipChance() {
+		return (int) (100*mPrecipChance);
 	}
 	public void setPrecipChance(double precipChance) {
 		mPrecipChance = precipChance;

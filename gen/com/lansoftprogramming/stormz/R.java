@@ -38,7 +38,7 @@ public final class R {
         public static final int wind=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000b;
+        public static final int action_settings=0x7f08000d;
         public static final int humidityLabel=0x7f080006;
         public static final int humidityValue=0x7f080007;
         public static final int iconImageView=0x7f080004;
@@ -47,6 +47,8 @@ public final class R {
         public static final int locationLabel=0x7f080003;
         public static final int precipLabel=0x7f080008;
         public static final int precipValue=0x7f080009;
+        public static final int progressBar1=0x7f08000c;
+        public static final int refreshImageView=0x7f08000b;
         public static final int temperatureLabel=0x7f080000;
         public static final int textView1=0x7f08000a;
         public static final int timeLabel=0x7f080002;
