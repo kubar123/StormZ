@@ -1,4 +1,7 @@
-package com.lansoftprogramming.stormz;
+package com.lansoftprogramming.stormz.ui;
+import com.lansoftprogramming.stormz.R;
+import com.lansoftprogramming.stormz.R.string;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;

@@ -1,4 +1,4 @@
-package com.lansoftprogramming.stormz;
+package com.lansoftprogramming.stormz.ui;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,9 +9,16 @@ import butterknife.ButterKnife;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import com.lansoftprogramming.stormz.R;
+import com.lansoftprogramming.stormz.R.id;
+import com.lansoftprogramming.stormz.R.layout;
+import com.lansoftprogramming.stormz.R.string;
+import com.lansoftprogramming.stormz.weather.Current;
+import com.lansoftprogramming.stormz.weather.Forecast;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -44,7 +51,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	public static final String TAG = MainActivity.class.getSimpleName();
-	private CurrentWeather mCurrentWeather;
+	private Forecast mForecast;
 	
 	private double latitude;
     private double longitude;
@@ -70,13 +77,11 @@ public class MainActivity extends Activity {
         
         mProgressBar1.setVisibility(View.INVISIBLE);
         
+        //default initialized long/lat
         latitude=37.8267;
-        Log.i(TAG,"start: LAT: "+latitude);
         longitude=-122.423;
-//        Log.i(TAG,"LONG : "+longitude);
-//        latitude=(Double)null;
-//        longitude=(Double) null;
-        //set themp
+        
+        //setting location...
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE); 
         LocationListener locList=new LocationListener(){
         	@Override
@@ -103,8 +108,6 @@ public class MainActivity extends Activity {
         };
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,1,100,locList);
         
-
-        //mRefreshImageView.performClick();
         mRefreshImageView.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -116,7 +119,6 @@ public class MainActivity extends Activity {
         
         //ButterKnife.setDebug(true);
         Log.i(TAG,"gettingForecast: LAT: "+latitude);
-        
     }
 	private void getForecast(double latitude, double longitude) {
 		Log.i(TAG,"inGetForecast: LAT: "+latitude);
@@ -161,7 +163,7 @@ public class MainActivity extends Activity {
 						String jsonData=response.body().string();
 						Log.v(TAG,jsonData);
 						if(response.isSuccessful()){
-							mCurrentWeather=getCurrentDetails(jsonData);
+							mForecast=parseForecastDetails(jsonData);
 							runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
@@ -197,23 +199,35 @@ public class MainActivity extends Activity {
 		}
 	}
 	protected void updateDisplay() {
-		mTemperatureLabel.setText(mCurrentWeather.getTemperature()+"");
-		mTimeLabel.setText("At "+mCurrentWeather.getFormattedTime()+" it will be");
-		mHumidityValue.setText(mCurrentWeather.getHumidity()+"");
-		mPercipValue.setText(mCurrentWeather.getPrecipChance()+"%");
-		mSummaryValue.setText(mCurrentWeather.getSummary());
-		Drawable drawable=getResources().getDrawable(mCurrentWeather.getIconId());
+		Current current=mForecast.getCurrent();
+		
+		mTemperatureLabel.setText(current.getTemperature()+"");
+		mTimeLabel.setText("At "+current.getFormattedTime()+" it will be");
+		mHumidityValue.setText(current.getHumidity()+"");
+		mPercipValue.setText(current.getPrecipChance()+"%");
+		mSummaryValue.setText(current.getSummary());
+		Drawable drawable=getResources().getDrawable(current.getIconId());
+		
 		mIconImageView.setImageDrawable(drawable);
-		mLocationLabel.setText(mCurrentWeather.getLocation());
+		mLocationLabel.setText(current.getLocation());
 	}
-	protected CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
+	
+	private Forecast parseForecastDetails(String jsonData) throws JSONException{
+		Forecast forecast=new Forecast();
+		
+		forecast.setCurrent(getCurrentDetails(jsonData));
+		
+		return forecast;
+	}
+	
+	protected Current getCurrentDetails(String jsonData) throws JSONException {
 		JSONObject forecast=new JSONObject(jsonData);
 		String timezone=forecast.getString("timezone");
 		Log.i(TAG,"From JSON: "+timezone);
 		
 		JSONObject currently = forecast.getJSONObject("currently");
 		
-		CurrentWeather currentWeather=new CurrentWeather();
+		Current currentWeather=new Current();
 		currentWeather.setHumidity(currently.getDouble("humidity"));
 		currentWeather.setTime(currently.getLong("time"));
 		currentWeather.setIcon(currently.getString("icon"));
@@ -229,10 +243,7 @@ public class MainActivity extends Activity {
 			Log.i(TAG,"In address: LAT: "+latitude);
 			location = addresses.get(0).getFeatureName();
 			Log.i(TAG,"LOC: feature: "+location);
-			if(location.equalsIgnoreCase("Unnamed Rd")){
-				
-			}
-			if(location==null || location.length()<4){//may be unknown - show Post Code instead
+			if(location==null || location.length()<3){//may be unknown - show Post Code instead
 				location=addresses.get(0).getPostalCode();
 				Log.i(TAG,"LOC: POST: "+location);
 			}

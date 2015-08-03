@@ -1,4 +1,4 @@
-package com.lansoftprogramming.stormz;
+package com.lansoftprogramming.stormz.weather;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import com.lansoftprogramming.stormz.R;
+import com.lansoftprogramming.stormz.R.drawable;
+
 import android.location.Geocoder;
 
 
 
-public class CurrentWeather{
+public class Current{
 	private String mIcon;
 	private long mTime;
 	private double mTemperature;
